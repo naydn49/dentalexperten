@@ -18,8 +18,8 @@ export function About() {
             <div className="order-2 lg:order-1">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
                 <Image
-                  src="/team-practice-photo.jpg"
-                  alt="Jana und Fabian Jain - Die Dentalexperten"
+                  src="/jana-professional-headshot.png"
+                  alt="Jana Jain - Die Dentalexperten"
                   fill
                   className="object-cover"
                   priority
