@@ -1,6 +1,8 @@
 "use client"
 
 import { useLanguage } from "@/lib/language-context"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
 
 export default function AGBPage() {
   const { t } = useLanguage()
@@ -8,6 +10,14 @@ export default function AGBPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span>{t.backToHome}</span>
+        </Link>
+
         <h1 className="text-4xl font-bold mb-8 text-balance">{t.agbTitle}</h1>
 
         <div className="prose prose-slate max-w-none space-y-8">

@@ -8,6 +8,7 @@ export const translations = {
     contact: "Kontakt",
     booking: "Analyse buchen",
     getStarted: "Jetzt starten",
+    backToHome: "Zurück zur Startseite",
 
     // Hero
     professionalPractice: "Professionelles Praxismanagement",
@@ -157,6 +158,7 @@ export const translations = {
     security: "Sicherheit",
     imprint: "Impressum",
     allRightsReserved: "Alle Rechte vorbehalten.",
+    backToHome: "Zurück zur Startseite",
 
     // AGB Page
     agbTitle: "Allgemeine Geschäftsbedingungen (AGB) der Die Dentalexperten GbR",
@@ -289,6 +291,7 @@ export const translations = {
     contact: "Contact",
     booking: "Book Analysis",
     getStarted: "Get Started",
+    backToHome: "Back to Home",
 
     // Hero
     professionalPractice: "Professional Practice Management",
@@ -430,6 +433,7 @@ export const translations = {
     security: "Security",
     imprint: "Imprint",
     allRightsReserved: "All rights reserved.",
+    backToHome: "Back to Home",
 
     // AGB Page
     agbTitle: "General Terms and Conditions (GTC) of Die Dentalexperten GbR",

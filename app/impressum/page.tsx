@@ -1,6 +1,8 @@
 "use client"
 
 import { useLanguage } from "@/lib/language-context"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
 
 export default function ImpressumPage() {
   const { t } = useLanguage()
@@ -8,6 +10,14 @@ export default function ImpressumPage() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-4xl">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span>{t.backToHome}</span>
+        </Link>
+
         <h1 className="text-4xl font-bold mb-8">{t.impressumTitle}</h1>
 
         <div className="space-y-8 text-muted-foreground leading-relaxed">

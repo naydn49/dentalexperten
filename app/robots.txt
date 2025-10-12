@@ -1,0 +1,9 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Disallow crawling of API routes
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://die-dentalexperten.de/sitemap.xml
