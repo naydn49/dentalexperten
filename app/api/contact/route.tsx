@@ -1,100 +1,89 @@
 import { type NextRequest, NextResponse } from "next/server"
 import nodemailer from "nodemailer"
 
-// In-memory rate limiting store
+// Rate limiting store (in-memory, resets on server restart)
 const rateLimitStore = new Map<string, number>()
 const RATE_LIMIT_WINDOW = 30000 // 30 seconds in milliseconds
 
-// Clean up old entries every minute
-setInterval(() => {
-  const now = Date.now()
-  for (const [ip, timestamp] of rateLimitStore.entries()) {
-    if (now - timestamp > RATE_LIMIT_WINDOW) {
-      rateLimitStore.delete(ip)
-    }
-  }
-}, 60000)
-
-async function verifyRecaptcha(token: string): Promise<boolean> {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY
-
-  if (!secretKey) {
-    console.error("[v0] RECAPTCHA_SECRET_KEY not configured")
-    return false
-  }
-
-  try {
-    const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `secret=${secretKey}&response=${token}`,
-    })
-
-    const data = await response.json()
-    console.log("[v0] reCAPTCHA verification result:", data)
-
-    return data.success && data.score >= 0.5
-  } catch (error) {
-    console.error("[v0] reCAPTCHA verification error:", error)
-    return false
-  }
-}
-
 export async function POST(request: NextRequest) {
   try {
-    // Get client IP for rate limiting
-    const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown"
-    console.log("[v0] Contact form submission from IP:", ip)
-
-    // Check rate limiting
-    const now = Date.now()
-    const lastSubmission = rateLimitStore.get(ip)
-
-    if (lastSubmission && now - lastSubmission < RATE_LIMIT_WINDOW) {
-      const remainingTime = Math.ceil((RATE_LIMIT_WINDOW - (now - lastSubmission)) / 1000)
-      console.log("[v0] Rate limit exceeded for IP:", ip, "Remaining time:", remainingTime)
-      return NextResponse.json({ error: "Rate limit exceeded", remainingTime }, { status: 429 })
-    }
+    console.log("[v0] Contact form submission from IP:", request.ip || "unknown")
 
     // Parse request body
     const body = await request.json()
     const { name, email, practice, message, recaptchaToken } = body
 
-    console.log("[v0] Form data received:", { name, email, practice, messageLength: message?.length })
+    console.log("[v0] Form data received:", {
+      name,
+      email,
+      practice,
+      messageLength: message?.length,
+    })
 
     // Validate required fields
     if (!name || !email || !message) {
-      console.log("[v0] Missing required fields")
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Verify reCAPTCHA
+    // Verify reCAPTCHA token
+    const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY
+    if (!recaptchaSecret) {
+      console.error("[v0] RECAPTCHA_SECRET_KEY not configured")
+      return NextResponse.json({ error: "Server configuration error" }, { status: 500 })
+    }
+
     if (!recaptchaToken) {
-      console.log("[v0] Missing reCAPTCHA token")
-      return NextResponse.json({ error: "Missing reCAPTCHA token" }, { status: 400 })
+      console.log("[v0] No reCAPTCHA token provided")
+      return NextResponse.json({ error: "reCAPTCHA token missing" }, { status: 400 })
     }
 
-    const isValidRecaptcha = await verifyRecaptcha(recaptchaToken)
-    if (!isValidRecaptcha) {
+    const recaptchaResponse = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `secret=${recaptchaSecret}&response=${recaptchaToken}`,
+    })
+
+    const recaptchaData = await recaptchaResponse.json()
+    console.log("[v0] reCAPTCHA verification result:", {
+      success: recaptchaData.success,
+      "error-codes": recaptchaData["error-codes"],
+    })
+
+    if (!recaptchaData.success) {
       console.log("[v0] Invalid reCAPTCHA token")
-      return NextResponse.json({ error: "Invalid reCAPTCHA" }, { status: 400 })
+      return NextResponse.json({ error: "reCAPTCHA verification failed" }, { status: 400 })
     }
 
-    // Check SMTP configuration
+    // Rate limiting by IP
+    const clientIp = request.ip || request.headers.get("x-forwarded-for") || "unknown"
+    const now = Date.now()
+    const lastSubmission = rateLimitStore.get(clientIp)
+
+    if (lastSubmission && now - lastSubmission < RATE_LIMIT_WINDOW) {
+      const remainingTime = Math.ceil((RATE_LIMIT_WINDOW - (now - lastSubmission)) / 1000)
+      console.log("[v0] Rate limit exceeded for IP:", clientIp, "Remaining time:", remainingTime)
+      return NextResponse.json(
+        {
+          error: "Rate limit exceeded",
+          remainingTime,
+        },
+        { status: 429 },
+      )
+    }
+
+    // Update rate limit store
+    rateLimitStore.set(clientIp, now)
+
+    // Send email via SMTP
     const smtpHost = process.env.SMTP_HOST
     const smtpPort = process.env.SMTP_PORT
     const smtpUser = process.env.SMTP_USER
     const smtpPassword = process.env.SMTP_PASSWORD
 
     if (!smtpHost || !smtpPort || !smtpUser || !smtpPassword) {
-      console.error("[v0] SMTP configuration missing:", {
-        hasHost: !!smtpHost,
-        hasPort: !!smtpPort,
-        hasUser: !!smtpUser,
-        hasPassword: !!smtpPassword,
-      })
+      console.error("[v0] SMTP configuration missing")
       return NextResponse.json({ error: "Email service not configured" }, { status: 500 })
     }
 
@@ -104,24 +93,23 @@ export async function POST(request: NextRequest) {
       user: smtpUser,
     })
 
-    // Create nodemailer transporter
     const transporter = nodemailer.createTransport({
       host: smtpHost,
       port: Number.parseInt(smtpPort),
-      secure: Number.parseInt(smtpPort) === 465, // true for 465, false for other ports
+      secure: Number.parseInt(smtpPort) === 465,
       auth: {
         user: smtpUser,
         pass: smtpPassword,
       },
     })
 
-    // Verify transporter configuration
+    // Verify SMTP connection
     try {
       await transporter.verify()
-      console.log("[v0] SMTP transporter verified successfully")
+      console.log("[v0] SMTP connection verified")
     } catch (error) {
-      console.error("[v0] SMTP transporter verification failed:", error)
-      return NextResponse.json({ error: "Email service configuration error" }, { status: 500 })
+      console.error("[v0] SMTP verification failed:", error)
+      return NextResponse.json({ error: "Email service connection failed" }, { status: 500 })
     }
 
     // Send email
@@ -129,36 +117,40 @@ export async function POST(request: NextRequest) {
       from: smtpUser,
       to: "jain@die-dentalexperten.de",
       subject: `Neue Kontaktanfrage von ${name}`,
-      text: `
-Name: ${name}
-E-Mail: ${email}
-Praxis: ${practice || "Nicht angegeben"}
-
-Nachricht:
-${message}
-      `,
       html: `
         <h2>Neue Kontaktanfrage</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>E-Mail:</strong> ${email}</p>
-        <p><strong>Praxis:</strong> ${practice || "Nicht angegeben"}</p>
-        <h3>Nachricht:</h3>
+        ${practice ? `<p><strong>Praxis:</strong> ${practice}</p>` : ""}
+        <p><strong>Nachricht:</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
+      `,
+      text: `
+Neue Kontaktanfrage
+
+Name: ${name}
+E-Mail: ${email}
+${practice ? `Praxis: ${practice}` : ""}
+
+Nachricht:
+${message}
       `,
     }
 
     console.log("[v0] Sending email to:", mailOptions.to)
-    await transporter.sendMail(mailOptions)
-    console.log("[v0] Email sent successfully")
 
-    // Update rate limit store
-    rateLimitStore.set(ip, now)
+    await transporter.sendMail(mailOptions)
+
+    console.log("[v0] Email sent successfully")
 
     return NextResponse.json({ success: true, message: "Email sent successfully" }, { status: 200 })
   } catch (error) {
     console.error("[v0] Contact form error:", error)
     return NextResponse.json(
-      { error: "Failed to send email", details: error instanceof Error ? error.message : "Unknown error" },
+      {
+        error: "Internal server error",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
       { status: 500 },
     )
   }
