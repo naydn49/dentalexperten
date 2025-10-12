@@ -25,6 +25,16 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
   const product = PRODUCTS.find((p) => p.id === productId)
 
   useEffect(() => {
+    const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
+
+    console.log("[v0] PayPal Client ID configured:", !!clientId)
+
+    if (!clientId) {
+      setError("PayPal ist nicht konfiguriert. Bitte fügen Sie NEXT_PUBLIC_PAYPAL_CLIENT_ID hinzu.")
+      setIsLoading(false)
+      return
+    }
+
     if (!product) {
       setError(t.productNotFound || "Product not found")
       setIsLoading(false)
@@ -39,12 +49,14 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
       }
 
       const script = document.createElement("script")
-      script.src = `https://www.paypal.com/sdk/js?client-id=${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}&currency=EUR&locale=${language === "de" ? "de_DE" : "en_US"}`
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR&locale=${language === "de" ? "de_DE" : "en_US"}`
       script.async = true
       script.onload = () => {
+        console.log("[v0] PayPal SDK loaded successfully")
         initializePayPal()
       }
       script.onerror = () => {
+        console.error("[v0] Failed to load PayPal SDK")
         setError(t.paypalLoadError || "Failed to load PayPal")
         setIsLoading(false)
       }
@@ -67,6 +79,7 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
           },
           createOrder: async () => {
             try {
+              console.log("[v0] Creating PayPal order for product:", product.id)
               const response = await fetch("/api/paypal/create-order", {
                 method: "POST",
                 headers: {
@@ -81,6 +94,7 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
               })
 
               const order = await response.json()
+              console.log("[v0] PayPal order created:", order)
 
               if (order.error) {
                 throw new Error(order.error)
@@ -95,6 +109,7 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
           },
           onApprove: async (data: any) => {
             try {
+              console.log("[v0] PayPal payment approved, capturing order:", data.orderID)
               const response = await fetch("/api/paypal/capture-order", {
                 method: "POST",
                 headers: {
@@ -106,6 +121,7 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
               })
 
               const captureData = await response.json()
+              console.log("[v0] PayPal order captured:", captureData)
 
               if (captureData.error) {
                 throw new Error(captureData.error)
@@ -125,6 +141,7 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
         })
         .render(paypalRef.current)
         .then(() => {
+          console.log("[v0] PayPal buttons rendered successfully")
           setIsLoading(false)
         })
         .catch((err: any) => {

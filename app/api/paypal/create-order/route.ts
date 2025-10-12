@@ -3,7 +3,20 @@ import { type NextRequest, NextResponse } from "next/server"
 const PAYPAL_API_BASE = process.env.PAYPAL_API_BASE || "https://api-m.sandbox.paypal.com"
 
 async function getAccessToken() {
-  const auth = Buffer.from(`${process.env.PAYPAL_CLIENT_ID}:${process.env.PAYPAL_CLIENT_SECRET}`).toString("base64")
+  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
+  const clientSecret = process.env.PAYPAL_CLIENT_SECRET
+
+  console.log("[v0] PayPal credentials configured:", {
+    clientId: !!clientId,
+    clientSecret: !!clientSecret,
+    apiBase: PAYPAL_API_BASE,
+  })
+
+  if (!clientId || !clientSecret) {
+    throw new Error("PayPal credentials not configured")
+  }
+
+  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64")
 
   const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
     method: "POST",
@@ -15,12 +28,21 @@ async function getAccessToken() {
   })
 
   const data = await response.json()
+
+  if (!response.ok) {
+    console.error("[v0] PayPal auth error:", data)
+    throw new Error("Failed to get PayPal access token")
+  }
+
+  console.log("[v0] PayPal access token obtained")
   return data.access_token
 }
 
 export async function POST(request: NextRequest) {
   try {
     const { packageId, packageName, amount, currency } = await request.json()
+
+    console.log("[v0] Creating PayPal order:", { packageId, packageName, amount, currency })
 
     const accessToken = await getAccessToken()
 
@@ -53,6 +75,13 @@ export async function POST(request: NextRequest) {
     })
 
     const order = await response.json()
+
+    if (!response.ok) {
+      console.error("[v0] PayPal order creation error:", order)
+      return NextResponse.json({ error: order.message || "Failed to create order" }, { status: 500 })
+    }
+
+    console.log("[v0] PayPal order created successfully:", order.id)
     return NextResponse.json(order)
   } catch (error) {
     console.error("[v0] Error creating PayPal order:", error)
