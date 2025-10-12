@@ -108,7 +108,7 @@ export const translations = {
     // Light Package
     lightPackage: "Light",
     lightPackageDesc: "Basis-Analyse für den Einstieg",
-    lightPrice: "€199",
+    lightPrice: "€1",
     lightFeature1: "Grundlegende Abrechnungsprüfung",
     lightFeature2: "Schriftlicher Bericht mit Ergebnissen",
     lightFeature3: "E-Mail-Support",
@@ -383,7 +383,7 @@ export const translations = {
     // Light Package
     lightPackage: "Light",
     lightPackageDesc: "Basic analysis to get started",
-    lightPrice: "€199",
+    lightPrice: "€1",
     lightFeature1: "Basic billing review",
     lightFeature2: "Written report with findings",
     lightFeature3: "Email support",

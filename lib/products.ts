@@ -16,7 +16,7 @@ export const PRODUCTS: Product[] = [
     nameEn: "Light",
     description: "Basis-Abrechnungsanalyse für 1-3 Behandler",
     descriptionEn: "Basic billing analysis for 1-3 practitioners",
-    priceInCents: 19900, // €199
+    priceInCents: 100, // €1
     currency: "eur",
   },
   {
