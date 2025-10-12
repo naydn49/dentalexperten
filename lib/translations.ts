@@ -283,6 +283,20 @@ export const translations = {
     paypalLoadError: "PayPal konnte nicht geladen werden",
     paymentError: "Ein Zahlungsfehler ist aufgetreten",
     loadingPayment: "Zahlung wird geladen...",
+
+    // Payment Success Page
+    paymentSuccessTitle: "Zahlung erfolgreich!",
+    paymentSuccessDescription:
+      "Vielen Dank für Ihre Buchung! Ihre Zahlung wurde erfolgreich verarbeitet und wir haben Ihre Bestellung erhalten.",
+    whatHappensNext: "Was passiert als Nächstes?",
+    paymentSuccessStep1:
+      "Sie erhalten in Kürze eine Bestätigungs-E-Mail mit allen Details zu Ihrer Buchung an die angegebene E-Mail-Adresse.",
+    paymentSuccessStep2:
+      "Unser Team wird sich innerhalb von 24 Stunden bei Ihnen melden, um die nächsten Schritte zu besprechen.",
+    paymentSuccessStep3:
+      "Wir werden gemeinsam einen Termin für Ihre Abrechnungs-Analyse vereinbaren und alle notwendigen Unterlagen besprechen.",
+    paymentSuccessFooter:
+      "Bei Fragen können Sie uns jederzeit unter jain@die-dentalexperten.de oder +49 (0) 176 51899779 erreichen.",
   },
   en: {
     // Header
@@ -557,5 +571,18 @@ export const translations = {
     paypalLoadError: "Failed to load PayPal",
     paymentError: "A payment error occurred",
     loadingPayment: "Loading payment...",
+
+    // Payment Success Page
+    paymentSuccessTitle: "Payment Successful!",
+    paymentSuccessDescription:
+      "Thank you for your booking! Your payment has been successfully processed and we have received your order.",
+    whatHappensNext: "What Happens Next?",
+    paymentSuccessStep1:
+      "You will shortly receive a confirmation email with all details about your booking at the provided email address.",
+    paymentSuccessStep2: "Our team will contact you within 24 hours to discuss the next steps.",
+    paymentSuccessStep3:
+      "We will schedule an appointment together for your billing analysis and discuss all necessary documents.",
+    paymentSuccessFooter:
+      "If you have any questions, you can reach us anytime at jain@die-dentalexperten.de or +49 (0) 176 51899779.",
   },
 }
