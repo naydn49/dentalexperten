@@ -121,8 +121,7 @@ export function Contact() {
   }
 
   const openCalendly = () => {
-    // Replace with your actual Calendly URL
-    window.open("https://calendly.com/your-calendly-link", "_blank")
+    window.open("https://www.calendly.com/die-dentalexperten", "_blank")
   }
 
   return (
@@ -259,14 +258,14 @@ export function Contact() {
         </div>
 
         <Card className="border-2 border-primary/30 bg-primary/5">
-          <CardContent className="py-8">
+          <CardContent className="py-10 px-6">
             <div className="flex flex-col sm:flex-row items-center gap-6 max-w-3xl mx-auto">
-              <div className="p-4 rounded-lg bg-primary/10 flex-shrink-0">
-                <Calendar className="h-8 w-8 text-primary" />
+              <div className="p-5 rounded-lg bg-primary/10 flex-shrink-0">
+                <Calendar className="h-14 w-14 text-primary" />
               </div>
               <div className="flex-1 text-center sm:text-left">
-                <h3 className="font-semibold text-lg mb-2">{t.bookAppointmentCalendly}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{t.calendlyDescription}</p>
+                <h3 className="font-semibold text-xl mb-2">{t.bookAppointmentCalendly}</h3>
+                <p className="text-base text-muted-foreground mb-5">{t.calendlyDescription}</p>
                 <Button onClick={openCalendly} size="lg" className="w-full sm:w-auto">
                   <Calendar className="mr-2 h-5 w-5" />
                   {t.bookAppointmentCalendly}
