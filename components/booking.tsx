@@ -56,7 +56,7 @@ export function Booking() {
 
   return (
     <>
-      <section id="booking" className="py-16 sm:py-20 lg:py-24 bg-muted/30">
+      <section id="booking" className="pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-10 lg:pb-12 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
@@ -115,7 +115,7 @@ export function Booking() {
             ))}
           </div>
 
-          <div className="flex items-center gap-4 mt-8 mb-8">
+          <div className="flex items-center gap-4 mt-16 mb-0">
             <div className="flex-1 border-t border-border"></div>
             <span className="text-sm sm:text-base text-muted-foreground whitespace-nowrap px-2">
               {t.notSureWhichPackage}

@@ -15,7 +15,7 @@ export function About() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image column */}
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1 space-y-6">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
                 <Image
                   src="/jana-professional-headshot.png"
@@ -23,6 +23,14 @@ export function About() {
                   fill
                   className="object-cover"
                   priority
+                />
+              </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
+                <Image
+                  src="/fabian-professional-headshot.png"
+                  alt="Fabian Jain - Die Dentalexperten"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>

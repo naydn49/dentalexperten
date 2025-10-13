@@ -77,7 +77,7 @@ export function CookieConsent() {
                 <p className="mb-4 text-sm text-muted-foreground">{t.cookieDescription}</p>
                 <p className="mb-4 text-sm text-muted-foreground">
                   {t.cookieDetailsText}{" "}
-                  <Link href="/datenschutz" className="underline hover:text-foreground">
+                  <Link href="/agb" className="underline hover:text-foreground">
                     {t.privacyPolicy}
                   </Link>
                   .

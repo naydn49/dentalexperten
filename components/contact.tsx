@@ -125,7 +125,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="pt-0 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section id="contact" className="pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center space-y-3 sm:space-y-4 mb-10 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">{t.getInTouch}</h2>
@@ -134,7 +134,7 @@ export function Contact() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 mb-6">
           <Card className="h-fit">
             <CardHeader>
               <CardTitle className="text-lg sm:text-xl">{t.sendMessage}</CardTitle>
@@ -251,10 +251,12 @@ export function Contact() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 mb-6">
-          <div className="flex-1 border-t border-border"></div>
-          <span className="text-xs uppercase text-muted-foreground">{t.orBookDirectly || "oder"}</span>
-          <div className="flex-1 border-t border-border"></div>
+        <div className="my-6">
+          <div className="flex items-center gap-4">
+            <div className="flex-1 border-t border-border"></div>
+            <span className="text-xs uppercase text-muted-foreground">{t.orBookDirectly || "oder"}</span>
+            <div className="flex-1 border-t border-border"></div>
+          </div>
         </div>
 
         <Card className="border-2 border-primary/30 bg-primary/5">
