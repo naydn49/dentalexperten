@@ -18,54 +18,57 @@ export default function ImpressumPage() {
           <span>{t.backToHome}</span>
         </Link>
 
-        <h1 className="text-4xl font-bold mb-8">{t.impressumTitle}</h1>
+        <h1 className="text-4xl font-bold mb-8">Impressum</h1>
 
-        <div className="space-y-8 text-muted-foreground leading-relaxed">
-          {/* Company Information */}
+        <div className="space-y-6 text-muted-foreground leading-relaxed">
           <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">{t.impressumCompanyInfo}</h2>
             <p className="mb-2">
-              <strong>Die Dentalexperten Jain & Jain GbR</strong>
+              <strong>Die Dentalexperten Jain & Jain GbR (in Gründung)</strong>
             </p>
-            <p className="mb-2">{t.impressumAddress}</p>
+            <p className="mb-2">Vertreten durch die Gesellschafter:</p>
+            <p className="mb-2">Jana Jain und Fabian Jain</p>
+            <p className="mb-2">Nuthestraße 24G</p>
+            <p className="mb-2">12307 Berlin</p>
+            <p className="mb-4">Deutschland</p>
+
+            <p className="mb-2">Rechtsform: Gesellschaft bürgerlichen Rechts (GbR), in Gründung</p>
             <p className="mb-2">
-              <strong>{t.phone}:</strong> +49 (0) 123 456789
+              <strong>Telefon:</strong> +49 (0) 176 51899779
             </p>
-            <p className="mb-2">
-              <strong>{t.email}:</strong> info@dentalexperten-jain.de
+            <p className="mb-4">
+              <strong>E-Mail:</strong> jain@die-dentalexperten.de
             </p>
           </section>
 
-          {/* Representatives */}
           <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">{t.impressumRepresentatives}</h2>
-            <p>Fabian Jain</p>
-            <p>Jana Jain</p>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">Vertretungsberechtigte Gesellschafter:</h2>
+            <p className="mb-2">Jana Jain</p>
+            <p className="mb-4">Fabian Jain</p>
           </section>
 
-          {/* VAT ID */}
           <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">{t.impressumVatId}</h2>
-            <p>{t.impressumVatIdNumber}</p>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">
+              Verantwortlich für den Inhalt gemäß § 55 Abs. 2 RStV (Rundfunkstaatsvertrag):
+            </h2>
+            <p className="mb-2">Jana Jain und Fabian Jain</p>
+            <p className="mb-2">Nuthestraße 24G</p>
+            <p className="mb-4">12307 Berlin</p>
           </section>
 
-          {/* Responsible for content */}
           <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">{t.impressumResponsible}</h2>
-            <p>Fabian Jain & Jana Jain</p>
-            <p>Die Dentalexperten Jain & Jain GbR</p>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">Hinweis zur Haftung:</h2>
+            <p className="mb-4">
+              Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für
+              den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+            </p>
           </section>
 
-          {/* Disclaimer */}
           <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">{t.impressumDisclaimer}</h2>
-            <p className="mb-4">{t.impressumDisclaimerText}</p>
-          </section>
-
-          {/* Copyright */}
-          <section>
-            <h2 className="text-2xl font-semibold text-foreground mb-4">{t.impressumCopyright}</h2>
-            <p>{t.impressumCopyrightText}</p>
+            <h2 className="text-2xl font-semibold text-foreground mb-4">Hinweis zur Unternehmensgründung:</h2>
+            <p>
+              Die Dentalexperten Jain & Jain GbR befindet sich derzeit in Gründung. Eine Steuernummer wurde noch nicht
+              zugeteilt.
+            </p>
           </section>
         </div>
       </div>
