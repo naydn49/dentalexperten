@@ -16,7 +16,7 @@ export function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image column */}
             <div className="order-2 lg:order-1 space-y-6">
-              <div className="max-w-lg mx-auto">
+              <div className="max-w-md mx-auto">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                   <Image
                     src="/jana-professional-headshot.png"
@@ -28,7 +28,7 @@ export function About() {
                 </div>
                 <p className="text-center mt-3 font-semibold text-lg">Jana</p>
               </div>
-              <div className="max-w-lg mx-auto">
+              <div className="max-w-md mx-auto">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                   <Image
                     src="/fabian-professional-headshot.png"
@@ -39,7 +39,7 @@ export function About() {
                 </div>
                 <p className="text-center mt-3 font-semibold text-lg">Fabian</p>
               </div>
-              <div className="max-w-lg mx-auto">
+              <div className="max-w-md mx-auto">
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                   <Image
                     src="/sarah-professional-headshot.png"
