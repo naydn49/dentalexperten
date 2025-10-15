@@ -50,6 +50,8 @@ export const translations = {
       "Fabian ist als Sozialpädagoge in die Dental-Branche reingerutscht und bringt über 15 Jahre Erfahrung in den Bereichen Vertrieb, Verkauf und Kommunikation mit. Seine einzigartige Perspektive ermöglicht es ihm, Praxisprozesse aus einem anderen Blickwinkel zu betrachten und innovative Lösungen zu entwickeln.",
     janaExperience:
       "Jana bringt als gelernte ZFA und später ZMV über 20 Jahre Erfahrung in den Bereichen Abrechnung und Praxismanagement mit. Sie beherrscht sowohl die maximale als auch die 'normale' Abrechnung und kennt alle Facetten der zahnärztlichen Abrechnung aus der Praxis.",
+    sarahExperience:
+      "Sarah ist die Z1 Spezialisten im Team. Mit über 20 jähriger Erfahrung als Praxismanagerin, Abrechnungsexpertin und Betriebswirtin im Sozial- und Gesundheitswesen unterstützt sie Zahnärzte dabei, auch in Zukunft wettbewerbsfähig zu bleiben. Sarah hat einen klaren Fokus auf Zahlen und ein feines Gespür für Menschen. Sie betreut ihre Kunden mit einer großen Portion Leidenschaft, großem Fachwissen, Empathie und manchmal auch Strenge - ihren Blick immer aufs Ganze gerichtet.",
     teamApproach:
       "Unser gesamtes Team der Dentalexperten geht individuell auf Ihre Wünsche und die Praxisphilosophie ein. Wir verstehen, dass jede Praxis einzigartig ist und entwickeln maßgeschneiderte Lösungen, die zu Ihnen passen.",
     ourCompetencies: "Unsere Kompetenzen",
@@ -344,6 +346,8 @@ export const translations = {
       "Fabian stumbled into the dental industry as a social pedagogue and brings over 15 years of experience in sales and communication. His unique perspective allows him to view practice processes from a different angle and develop innovative solutions.",
     janaExperience:
       "Jana brings over 20 years of experience in billing and practice management as a trained dental assistant and later practice manager. She masters both maximum and 'normal' billing and knows all facets of dental billing from practical experience.",
+    sarahExperience:
+      "Sarah is the Z1 specialist on the team. With over 20 years of experience as a practice manager, billing expert, and business economist in social and healthcare, she helps dentists remain competitive in the future. Sarah has a clear focus on numbers and a fine sense for people. She supports her clients with great passion, extensive expertise, empathy, and sometimes strictness - always keeping the big picture in mind.",
     teamApproach:
       "Our entire team at Die Dentalexperten individually addresses your wishes and practice philosophy. We understand that every practice is unique and develop customized solutions that fit you.",
 

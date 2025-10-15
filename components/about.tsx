@@ -33,6 +33,14 @@ export function About() {
                   className="object-cover"
                 />
               </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
+                <Image
+                  src="/sarah-professional-headshot.png"
+                  alt="Sarah - Die Dentalexperten"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
 
             {/* Text column */}
@@ -47,6 +55,16 @@ export function About() {
                 <p className="text-muted-foreground">{t.aboutIntro}</p>
               </div>
 
+              {/* Jana's experience */}
+              <div className="flex gap-4 items-start">
+                <div className="flex-shrink-0 mt-1">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Award className="w-5 h-5 text-primary" />
+                  </div>
+                </div>
+                <p className="text-muted-foreground">{t.janaExperience}</p>
+              </div>
+
               {/* Fabian's experience */}
               <div className="flex gap-4 items-start">
                 <div className="flex-shrink-0 mt-1">
@@ -57,14 +75,13 @@ export function About() {
                 <p className="text-muted-foreground">{t.fabianExperience}</p>
               </div>
 
-              {/* Jana's experience */}
               <div className="flex gap-4 items-start">
                 <div className="flex-shrink-0 mt-1">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <Award className="w-5 h-5 text-primary" />
                   </div>
                 </div>
-                <p className="text-muted-foreground">{t.janaExperience}</p>
+                <p className="text-muted-foreground">{t.sarahExperience}</p>
               </div>
 
               {/* Team approach */}
