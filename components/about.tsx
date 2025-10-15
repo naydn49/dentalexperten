@@ -16,30 +16,39 @@ export function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image column */}
             <div className="order-2 lg:order-1 space-y-6">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
-                <Image
-                  src="/jana-professional-headshot.png"
-                  alt="Jana Jain - Die Dentalexperten"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+              <div className="max-w-lg mx-auto">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/jana-professional-headshot.png"
+                    alt="Jana Jain - Die Dentalexperten"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                <p className="text-center mt-3 font-semibold text-lg">Jana</p>
               </div>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
-                <Image
-                  src="/fabian-professional-headshot.png"
-                  alt="Fabian Jain - Die Dentalexperten"
-                  fill
-                  className="object-cover"
-                />
+              <div className="max-w-lg mx-auto">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/fabian-professional-headshot.png"
+                    alt="Fabian Jain - Die Dentalexperten"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <p className="text-center mt-3 font-semibold text-lg">Fabian</p>
               </div>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl max-w-lg mx-auto">
-                <Image
-                  src="/sarah-professional-headshot.png"
-                  alt="Sarah - Die Dentalexperten"
-                  fill
-                  className="object-cover"
-                />
+              <div className="max-w-lg mx-auto">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/sarah-professional-headshot.png"
+                    alt="Sarah - Die Dentalexperten"
+                    fill
+                    className="object-cover object-[center_20%]"
+                  />
+                </div>
+                <p className="text-center mt-3 font-semibold text-lg">Sarah</p>
               </div>
             </div>
 
