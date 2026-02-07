@@ -67,11 +67,25 @@ export async function POST(request: NextRequest) {
       }),
     })
 
-    const order = await response.json()
+    const orderText = await response.text()
+    console.log("[v0] PayPal raw response status:", response.status)
+    console.log("[v0] PayPal raw response body:", orderText)
+
+    let order: any
+    try {
+      order = JSON.parse(orderText)
+    } catch {
+      console.error("[v0] PayPal returned non-JSON response:", orderText)
+      return NextResponse.json({ error: "Invalid response from PayPal" }, { status: 500 })
+    }
 
     if (!response.ok) {
-      console.error("[v0] PayPal order creation error:", order)
-      return NextResponse.json({ error: order.message || "Failed to create order" }, { status: 500 })
+      console.error("[v0] PayPal order creation error:", JSON.stringify(order, null, 2))
+      const details = order.details?.map((d: any) => d.description || d.issue).join(", ") || ""
+      return NextResponse.json(
+        { error: order.message || "Failed to create order", details },
+        { status: 500 },
+      )
     }
 
     console.log("[v0] PayPal order created successfully:", order.id)

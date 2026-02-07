@@ -63,8 +63,11 @@ export default function PayPalCheckout({ productId }: PayPalCheckoutProps) {
 
             if (!response.ok) {
               const errorData = await response.json()
-              console.error("[v0] PayPal create order failed:", errorData)
-              throw new Error(errorData.error || "Failed to create order")
+              console.error("[v0] PayPal create order failed:", JSON.stringify(errorData))
+              const errorMsg = errorData.details
+                ? `${errorData.error}: ${errorData.details}`
+                : errorData.error || "Failed to create order"
+              throw new Error(errorMsg)
             }
 
             const order = await response.json()
