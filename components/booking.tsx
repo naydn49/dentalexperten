@@ -27,7 +27,8 @@ export function Booking() {
         { text: t.lightFeature1, included: true },
         { text: t.lightFeature2, included: true },
         { text: t.lightFeature3, included: true },
-        { text: t.lightFeature4, included: false },
+        { text: t.lightFeature4, included: true },
+        { text: t.lightFeature5, included: false },
       ],
       popular: false,
     },
@@ -94,12 +95,12 @@ export function Booking() {
                 }`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1 whitespace-nowrap z-10">
                     <Sparkles className="h-4 w-4" />
                     {t.mostPopular}
                   </div>
                 )}
-                <CardHeader className="text-center pb-8">
+                <CardHeader className={`text-center pb-8 ${pkg.popular ? "pt-10" : ""}`}>
                   <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
                   <CardDescription className="text-base mb-4">{pkg.description}</CardDescription>
                   <div className="mt-4">
@@ -110,9 +111,11 @@ export function Booking() {
                     <div className="text-sm text-muted-foreground mt-1">{t.priceNet}</div>
                   </div>
                   {pkg.roi && (
-                    <div className="mt-4 inline-flex items-center gap-1.5 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-sm font-medium">
-                      <TrendingUp className="h-4 w-4" />
-                      {pkg.roi}
+                    <div className="mt-5 flex justify-center">
+                      <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-semibold">
+                        <TrendingUp className="h-4 w-4 flex-shrink-0" />
+                        <span>{pkg.roi}</span>
+                      </div>
                     </div>
                   )}
                 </CardHeader>
