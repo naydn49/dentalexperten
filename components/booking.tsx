@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Check, Sparkles } from "lucide-react"
+import { Check, Sparkles, TrendingUp, X } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import PaymentModal from "@/components/payment-modal"
 
@@ -22,7 +22,14 @@ export function Booking() {
       name: t.lightPackage,
       description: t.lightPackageDesc,
       price: t.lightPrice,
-      features: [t.lightFeature1, t.lightFeature2, t.lightFeature3, t.lightFeature4],
+      roi: t.lightRoi,
+      features: [
+        { text: t.lightFeature1, included: true },
+        { text: t.lightFeature2, included: true },
+        { text: t.lightFeature3, included: true },
+        { text: t.lightFeature4, included: true },
+        { text: t.lightFeature5, included: false },
+      ],
       popular: false,
     },
     {
@@ -30,12 +37,16 @@ export function Booking() {
       name: t.essentialPackage,
       description: t.essentialPackageDesc,
       price: t.essentialPrice,
+      roi: t.essentialRoi,
       features: [
-        t.essentialFeature1,
-        t.essentialFeature2,
-        t.essentialFeature3,
-        t.essentialFeature4,
-        t.essentialFeature5,
+        { text: t.essentialFeature1, included: true },
+        { text: t.essentialFeature2, included: true },
+        { text: t.essentialFeature3, included: true },
+        { text: t.essentialFeature4, included: true },
+        { text: t.essentialFeature5, included: true },
+        { text: t.essentialFeature6, included: true },
+        { text: t.essentialFeature7, included: true },
+        { text: t.essentialFeature8, included: true },
       ],
       popular: true,
     },
@@ -44,7 +55,15 @@ export function Booking() {
       name: t.proPackage,
       description: t.proPackageDesc,
       price: t.proPrice,
-      features: [t.proFeature1, t.proFeature2, t.proFeature3, t.proFeature4, t.proFeature5, t.proFeature6],
+      roi: t.proRoi,
+      features: [
+        { text: t.proFeature1, included: true },
+        { text: t.proFeature2, included: true },
+        { text: t.proFeature3, included: true },
+        { text: t.proFeature4, included: true },
+        { text: t.proFeature5, included: true },
+        { text: t.proFeature6, included: true },
+      ],
       popular: false,
     },
   ]
@@ -76,12 +95,12 @@ export function Booking() {
                 }`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1 whitespace-nowrap z-10">
                     <Sparkles className="h-4 w-4" />
                     {t.mostPopular}
                   </div>
                 )}
-                <CardHeader className="text-center pb-8">
+                <CardHeader className={`text-center pb-8 ${pkg.popular ? "pt-10" : ""}`}>
                   <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
                   <CardDescription className="text-base mb-4">{pkg.description}</CardDescription>
                   <div className="mt-4">
@@ -91,13 +110,27 @@ export function Booking() {
                     </div>
                     <div className="text-sm text-muted-foreground mt-1">{t.priceNet}</div>
                   </div>
+                  {pkg.roi && (
+                    <div className="mt-5 flex justify-center">
+                      <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-semibold">
+                        <TrendingUp className="h-4 w-4 flex-shrink-0" />
+                        <span>{pkg.roi}</span>
+                      </div>
+                    </div>
+                  )}
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col">
                   <ul className="space-y-3 mb-6 flex-1">
                     {pkg.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-2">
-                        <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
+                        {feature.included ? (
+                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <X className="h-5 w-5 text-muted-foreground/50 mt-0.5 flex-shrink-0" />
+                        )}
+                        <span className={`text-sm ${feature.included ? "text-muted-foreground" : "text-muted-foreground/50"}`}>
+                          {feature.text}
+                        </span>
                       </li>
                     ))}
                   </ul>
