@@ -14,27 +14,27 @@ export const PRODUCTS: Product[] = [
     id: "light",
     name: "Light",
     nameEn: "Light",
-    description: "Basis-Abrechnungsanalyse für 1-3 Behandler",
-    descriptionEn: "Basic billing analysis for 1-3 practitioners",
-    priceInCents: 100, // €1
+    description: "Basis-Abrechnungsanalyse mit schriftlichem Bericht",
+    descriptionEn: "Basic billing analysis with written report",
+    priceInCents: 49900, // €499
     currency: "eur",
   },
   {
     id: "essential",
     name: "Essential",
     nameEn: "Essential",
-    description: "Umfassende Abrechnungsanalyse mit Empfehlungen für 1-3 Behandler",
-    descriptionEn: "Comprehensive billing analysis with recommendations for 1-3 practitioners",
-    priceInCents: 39900, // €399
+    description: "Ausführliche Analyse mit Optimierungstipps und Beratungsgespräch",
+    descriptionEn: "Detailed analysis with optimization tips and consultation",
+    priceInCents: 79900, // €799
     currency: "eur",
   },
   {
     id: "pro",
     name: "Pro",
     nameEn: "Pro",
-    description: "Vollständige Abrechnungsanalyse mit persönlicher Beratung für 1-3 Behandler",
-    descriptionEn: "Complete billing analysis with personal consultation for 1-3 practitioners",
-    priceInCents: 74900, // €749
+    description: "Komplettpaket mit Software-Optimierung, Support und Live-Webinar",
+    descriptionEn: "Complete package with software optimization, support, and live webinar",
+    priceInCents: 249900, // €2.499
     currency: "eur",
   },
 ]
