@@ -110,7 +110,7 @@ export const translations = {
     // Light Package
     lightPackage: "Light",
     lightPackageDesc: "Basis-Analyse mit schriftlichem Bericht",
-    lightPrice: "€499",
+    lightPrice: "€1",
     lightRoi: "\u00D8 Return on Invest: 2-fach",
     lightFeature1: "Prüfung Heil- und Kostenpläne und Kostenvoranschläge auf Vollständigkeit",
     lightFeature2: "Prüfung verwendeter Steigerungsfaktoren",
@@ -408,7 +408,7 @@ export const translations = {
     // Light Package
     lightPackage: "Light",
     lightPackageDesc: "Basic analysis with written report",
-    lightPrice: "€499",
+    lightPrice: "€1",
     lightRoi: "\u00D8 Return on Invest: 2x",
     lightFeature1: "Review of treatment plans and cost estimates for completeness",
     lightFeature2: "Review of applied multipliers",
