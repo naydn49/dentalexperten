@@ -64,13 +64,6 @@ export async function POST(request: NextRequest) {
             custom_id: packageId,
           },
         ],
-        application_context: {
-          brand_name: "Die Dentalexperten Jain & Jain",
-          landing_page: "NO_PREFERENCE",
-          user_action: "PAY_NOW",
-          return_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment/success`,
-          cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment/cancel`,
-        },
       }),
     })
 
